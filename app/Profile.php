@@ -13,6 +13,15 @@ class Profile extends Model
         return $this->image ? '/storage/'.$this->image : 'https://via.placeholder.com/150';
     }
 
+    public function is_my_profile()
+    {
+        if(!isset(auth()->user()->id)){
+            return false;
+        }
+
+        return auth()->user()->id == $this->user_id;
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);

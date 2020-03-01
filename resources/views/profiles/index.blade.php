@@ -11,7 +11,9 @@
             <div class="d-flex align-items-center">
                 <h1>{{ $user->username }}</h1>
 
-                <follow-button user-id="{{$user->id}}" follows="{{$follows}}"></follow-button>
+                @if(!$user->profile->is_my_profile())
+                    <follow-button user-id="{{$user->id}}" follows="{{$follows}}"></follow-button>
+                @endif
             </div>
             
             <div class="d-flex flex-wrap">
@@ -19,8 +21,10 @@
                 <div class="pr-4 mt-2"><strong>{{ $followerstCount }}</strong> followers</div>
                 <div class="pr-4 mt-2"><strong>{{ $followingCount  }}</strong> following</div>
 
-                <div class="pr-2 mt-2"><a href="/profile/{{ $user->id }}/edit">Edit profile</a></div>
-                <div class=" mt-2"><a href="/p/create">New post</a></div>
+                @can('update', $user->profile)
+                    <div class="pr-2 mt-2"><a href="/profile/{{ $user->id }}/edit">Edit profile</a></div>
+                    <div class=" mt-2"><a href="/p/create">New post</a></div>
+                @endcan
             </div>
 
             <div class="pt-3 font-weight-bold">

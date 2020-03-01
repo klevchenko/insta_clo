@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Cache;
-use Symfony\Component\HttpKernel\Profiler\Profile;
 
 use Illuminate\Support\Facades\Gate;
 use App\Providers;
@@ -15,12 +14,14 @@ class ProfilesController extends Controller
 
     public function index($user)
     {
+        $cache_time_sec = 5;
+
         $user = User::findOrFail($user);
         $follows = auth()->user() ? auth()->user()->following->contains($user->id) : false;
 
         $postCount = Cache::remember(
             'count.posts.' . $user->id,
-            now()->addSecond(30),
+            now()->addSecond($cache_time_sec),
             function() use ($user) {
                 return $user->posts->count();
             }
@@ -28,7 +29,7 @@ class ProfilesController extends Controller
 
         $followerstCount = Cache::remember(
             'count.followers.' . $user->id,
-            now()->addSecond(30),
+            now()->addSecond($cache_time_sec),
             function() use ($user) {
                 return $user->profile->followers->count();
             }
@@ -36,7 +37,7 @@ class ProfilesController extends Controller
 
         $followingCount = Cache::remember(
             'count.following.' . $user->id,
-            now()->addSecond(30),
+            now()->addSecond($cache_time_sec),
             function() use ($user) {
                 return $user->following->count();
             }
@@ -60,11 +61,15 @@ class ProfilesController extends Controller
 
     public function edit(User $user)
     {
+        $this->authorize('update', $user->profile);
+
         return view('profiles/edit', compact('user'));
     }
 
     public function update(User $user)
     {
+        $this->authorize('update', $user->profile);
+
         $data = request()->validate([
             'title' => 'required',
             'description' => 'required',

@@ -2,13 +2,14 @@
 
 namespace App\Providers;
 
+use App\Profile;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 use App\User;
-use App\Policies\ProfilePolicy;
+use App\Policies\ProfilesPolicy;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -19,9 +20,8 @@ class AuthServiceProvider extends ServiceProvider
      */
 
     protected $policies = [
-        //'App\Model' => 'App\Policies\ModelPolicy',
-        //'App\User'  => 'App\Policies\ProfilePolicy' ,
-        User::class  => ProfilePolicy::class,
+        'App\Model' => 'App\Policies\ModelPolicy',
+        Profile::class  => ProfilesPolicy::class,
     ];
 
     /**
