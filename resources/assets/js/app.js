@@ -16,6 +16,7 @@ window.Vue = require('vue');
  */
 
 Vue.component('follow-button', require('./components/FollowButton.vue'));
+Vue.component('comments-form', require('./components/CommentsForm.vue'));
 
 const app = new Vue({
     el: '#app'

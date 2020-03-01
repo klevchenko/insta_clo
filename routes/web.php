@@ -25,3 +25,6 @@ Route::post('/follow/{user}', 'FollowsController@store');
 
 Route::get('/', 'PostsController@index');
 Route::get('/users', 'ProfilesController@showall')->name('allUsers');
+
+Route::post('/comment', 'CommentsController@store')->name('addComment');
+

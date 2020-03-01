@@ -32,6 +32,10 @@
                         {{$post->caption}}
                     </p>
 
+                    <hr>
+
+                    <comments-form user-id="{{auth()->user()->id}}" post-id="{{$post->id}}"></comments-form>
+
                 </div>
 
             </div>
