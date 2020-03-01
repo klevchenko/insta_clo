@@ -7,7 +7,9 @@
 
             @foreach($posts as $post)
                 <div class="col-12 col-lg-4 pt-4">
-                    <img src="/storage/{{ $post->image }}" class="w-100 mb-2" alt="">
+                    <a href="/p/{{$post->id}}">
+                        <img src="/storage/{{ $post->image }}" class="w-100 mb-2" alt="">
+                    </a>
                     <p>
                         <a href="/profile/{{$post->user->id}}"
                            class="text-dark">
