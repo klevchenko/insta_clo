@@ -9,11 +9,9 @@ use Illuminate\Http\Request;
 
 class CommentsController extends Controller
 {
-
+    
     public function index(Post $post)
     {
-        //dd($post->id);
-
         $comments = Comment::where('post_id', $post->id)
             ->with('user')
             ->latest()
