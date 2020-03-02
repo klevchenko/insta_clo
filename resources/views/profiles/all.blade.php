@@ -10,7 +10,7 @@
             @foreach($users as $user)
                 <div class="col-4 pt-4">
                     <a href="/profile/{{$user->id}}">
-                        <img src="{{ $user->profile->profileImage() }}" class="rounded-circle w-100" alt="">
+                        <img src="{{ $user->profile->profileImage() }}" class="rounded-circle w-75 d-block m-auto" alt="">
                         <h4 class="mt-3 text-center">{{ $user->username }}</h4>
 
                     </a>

@@ -4,10 +4,10 @@
 <div class="container">
     <div class="row">
        
-       <div class="col col-md-4 p-5">
+       <div class="col col-md-4 pt-3 p-lg-5">
             <img src="{{ $user->profile->profileImage() }}" class="rounded-circle w-100" alt="">
        </div>
-       <div class="col col-md-8 pt-5">
+       <div class="col col-md-8 pt-3 pt-lg-5">
             <div class="d-flex align-items-center">
                 <h1>{{ $user->username }}</h1>
 

@@ -17,11 +17,10 @@
                             <label for="caption" class="col-12 control-label">Caption</label>
 
                             <div class="col-12">
-                                <input id="caption" 
+                                <textarea id="caption"
                                 type="text" 
                                 class="form-control" 
-                                name="caption" 
-                                value="{{ old('caption') }}" autofocus>
+                                name="caption">{{ old('caption') }}</textarea>
 
                                 @if ($errors->has('caption'))
                                     <span class="help-block">

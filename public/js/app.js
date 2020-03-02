@@ -49383,26 +49383,99 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 
     props: ['userId', 'postId'],
 
-    mounted: function mounted() {
-        console.log('Component mounted.');
+    data: function data() {
+        return {
+            comment_text: '',
+            comments: null,
+            loading: true,
+            errored: false,
+            user_id: this.userId
+        };
     },
+    mounted: function mounted() {
+        var _this = this;
 
+        console.log('Component mounted.');
+
+        axios.get('/comments/' + this.postId).then(function (response) {
+            _this.comments = response.data;
+        }).catch(function (error) {
+            console.log(error);
+            _this.errored = true;
+        }).finally(function () {
+            return _this.loading = false;
+        });
+    },
 
     methods: {
         postComment: function postComment() {
-            var comment = document.getElementById('comment').value;
+            var _this2 = this;
 
             axios.post('/comment', {
-                comment: comment,
+                comment: this.comment_text,
                 userId: this.userId,
                 postId: this.postId
             }).then(function (resp) {
+                _this2.comments.unshift(resp.data);
+                _this2.comment_text = '';
+
+                console.log(_this2.comments);
+            }).catch(function (error) {
+                console.log(error);
+            });
+        },
+        destroyComment: function destroyComment(comment_id) {
+            var _this3 = this;
+
+            axios.delete('/comment/' + comment_id).then(function (resp) {
                 console.log(resp);
+                if (resp.data.status == true) {
+                    //this.comments.unshift(resp.data.id);
+
+                    for (var i = 0; i < _this3.comments.length; i++) {
+                        if (_this3.comments[i].id == resp.data.id) {
+                            _this3.comments.splice(i, 1);
+                            break;
+                        }
+                    }
+                }
+            }).catch(function (error) {
+                console.log(error);
             });
         }
     },
@@ -49419,6 +49492,55 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
+    _vm.errored
+      ? _c("section", [
+          _c("p", [_vm._v("We're sorry, we're not able to retrieve comments")])
+        ])
+      : _c(
+          "section",
+          { staticClass: "comments" },
+          [
+            _vm.loading
+              ? _c("div", [_vm._v("Loading...")])
+              : _vm._l(_vm.comments, function(comment) {
+                  return _c("div", { staticClass: "comment my-2" }, [
+                    _c(
+                      "a",
+                      { attrs: { href: "/profile/" + comment.user.id } },
+                      [
+                        _c("strong", [
+                          _vm._v(_vm._s(comment.user.username) + ": ")
+                        ])
+                      ]
+                    ),
+                    _vm._v(
+                      "\n            " +
+                        _vm._s(comment.text) +
+                        "\n\n            "
+                    ),
+                    _vm.user_id == comment.user.id
+                      ? _c(
+                          "button",
+                          {
+                            staticClass:
+                              "badge badge-pill badge-danger d-inline border-0",
+                            on: {
+                              click: function($event) {
+                                return _vm.destroyComment(comment.id)
+                              }
+                            }
+                          },
+                          [_vm._v("\n                del\n            ")]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c("hr")
+                  ])
+                })
+          ],
+          2
+        ),
+    _vm._v(" "),
     _c("h4", [_vm._v("Add comment")]),
     _vm._v(" "),
     _c(
@@ -49433,13 +49555,38 @@ var render = function() {
         }
       },
       [
-        _c("textarea", { attrs: { name: "comment", id: "comment" } }),
-        _vm._v(" "),
-        _c(
-          "button",
-          { staticClass: "btn btn-sm btn-primary", attrs: { type: "submit" } },
-          [_vm._v("Comment")]
-        )
+        _c("div", { staticClass: "form-group" }, [
+          _c("textarea", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.comment_text,
+                expression: "comment_text"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { name: "comment", id: "comment" },
+            domProps: { value: _vm.comment_text },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.comment_text = $event.target.value
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-sm btn-primary my-2",
+              attrs: { type: "submit" }
+            },
+            [_vm._v("Comment")]
+          )
+        ])
       ]
     )
   ])

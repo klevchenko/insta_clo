@@ -6,7 +6,7 @@
         <div class="col-12 col-md-8 offset-md-2">
 
             <div class="row">
-                <div class="col-12 col-lg-7 mb-5">
+                <div class="col-12 col-lg-7 mb-3 mb-lg-4">
                     <img src="/storage/{{$post->image}}" class="w-100" />
                 </div>
 
@@ -32,7 +32,7 @@
                         {{$post->caption}}
                     </p>
 
-                    <hr>
+                    <br>
 
                     <comments-form user-id="{{auth()->user()->id}}" post-id="{{$post->id}}"></comments-form>
 
