@@ -57,4 +57,19 @@ class PostsController extends Controller
             'follows' => $follows,
         ]);
     }
+
+    public function destroy(Post $post)
+    {
+        if($post->user_id != auth()->user()->id) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        dd($post);
+
+        if($post->delete()){
+            //
+        }
+
+    }
+
 }

@@ -8,6 +8,16 @@
             <div class="row">
                 <div class="col-12 col-lg-7 mb-3 mb-lg-4">
                     <img src="/storage/{{$post->image}}" class="w-100" />
+
+                    <form method="POST" action="/p/{{$post->id}}">
+                        {{ csrf_field() }}
+                        {{ method_field('DELETE') }}
+
+                        <div class="form-group my-4">
+                            <input type="submit" class="btn btn-block btn-sm btn-danger delete-user" value="Delete post">
+                        </div>
+                    </form>
+
                 </div>
 
                 <div class="col-12 col-lg-5">

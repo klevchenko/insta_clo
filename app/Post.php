@@ -18,4 +18,17 @@ class Post extends Model
     {
         return $this->belongsToMany(Comment::class);
     }
+
+    // delete all comments belongs to post
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(
+            function ($post){
+                $post->comments()->delete();
+            }
+        );
+    }
+
 }
