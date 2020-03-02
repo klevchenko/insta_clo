@@ -26,5 +26,12 @@ Route::post('/follow/{user}', 'FollowsController@store');
 Route::get('/', 'PostsController@index');
 Route::get('/users', 'ProfilesController@showall')->name('allUsers');
 
+// get all post comments
+Route::get('/comments/{post}', 'CommentsController@index')->name('getComments');
+
+// post one comment
 Route::post('/comment', 'CommentsController@store')->name('addComment');
+
+// delete comment
+Route::delete('/comment/{comment}', 'CommentsController@destroy')->name('destroyComment');
 
