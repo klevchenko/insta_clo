@@ -9,6 +9,18 @@ use Illuminate\Http\Request;
 
 class CommentsController extends Controller
 {
+
+    public function all()
+    {
+        $comments = Comment::get();
+
+        foreach ($comments->toArray() as $index => $daat) {
+            print_r($daat['post_id']."\n");
+            print_r($daat['text']."\n");
+        }
+
+        //dd($comments->toArray());
+    }
     
     public function index(Post $post)
     {

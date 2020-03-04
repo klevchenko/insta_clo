@@ -30,6 +30,7 @@ Route::get('/users', 'ProfilesController@showall')->name('allUsers');
 
 // get all post comments
 Route::get('/comments/{post}', 'CommentsController@index')->name('getComments');
+Route::get('/comments/', 'CommentsController@all');
 
 // post one comment
 Route::post('/comment', 'CommentsController@store')->name('addComment');

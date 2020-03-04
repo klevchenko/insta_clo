@@ -20,15 +20,7 @@ class Post extends Model
     }
 
     // delete all comments belongs to post
-    protected static function boot()
-    {
-        parent::boot();
+    // check here https://laravel.su/docs/5.4/migrations#indexes
 
-        static::deleting(
-            function ($post){
-                $post->comments()->delete();
-            }
-        );
-    }
 
 }

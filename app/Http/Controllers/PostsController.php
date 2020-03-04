@@ -64,10 +64,13 @@ class PostsController extends Controller
             abort(403, 'Unauthorized action.');
         }
 
-        dd($post);
+
 
         if($post->delete()){
-            //
+            dd('del');
+        } else {
+            dd('NO del');
+
         }
 
     }
