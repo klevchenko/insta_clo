@@ -34,8 +34,9 @@
                             </span>
                         </a>
 
-                        <follow-button user-id="{{$post->user->id}}" follows="{{$follows}}"></follow-button>
-
+                        @if(!$post->user->profile->is_my_profile())
+                            <follow-button user-id="{{$post->user->id}}" follows="{{$follows}}"></follow-button>
+                        @endif
                     </h5>
 
                     <p>
