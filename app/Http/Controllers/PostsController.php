@@ -64,13 +64,10 @@ class PostsController extends Controller
             abort(403, 'Unauthorized action.');
         }
 
-
-
         if($post->delete()){
-            dd('del');
+            return redirect('/profile/'.auth()->user()->id);
         } else {
-            dd('NO del');
-
+            abort(403, 'Unauthorized action.');
         }
 
     }
