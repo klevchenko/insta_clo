@@ -9,19 +9,19 @@
                 <div class="col-12 col-lg-7 mb-3 mb-lg-4">
                     <img src="/storage/{{$post->image}}" class="w-100" />
 
-                    {{$like}}
+                    <div class="d-flex my-3">
+                        <like-button post-id="{{$post->id}}" like="{{$like}}"></like-button>
 
-                    <like-button post-id="{{$post->id}}" like="{{$like}}"></like-button>
+                        @if($post->user->profile->is_my_profile())
+                            <form method="POST" action="/p/{{$post->id}}">
+                                {{ csrf_field() }}
+                                {{ method_field('DELETE') }}
 
-                    <form method="POST" action="/p/{{$post->id}}">
-                        {{ csrf_field() }}
-                        {{ method_field('DELETE') }}
-
-                        <div class="form-group my-4">
-                            <input type="submit" class="btn btn-block btn-sm btn-danger delete-user" value="Delete post">
-                        </div>
-                    </form>
-
+                                <input type="submit" class="btn btn-sm btn-danger mx-2 delete-user" value="Delete post">
+                            </form>
+                        @endif
+                    </div>
+                    
                 </div>
 
                 <div class="col-12 col-lg-5">

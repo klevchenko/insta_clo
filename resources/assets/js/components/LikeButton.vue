@@ -1,6 +1,6 @@
 <template>
     <div>
-         <button @click="likePost" class="btn btn-sm btn-primary m-3" v-text="btnText"></button>
+         <button @click="likePost" class="btn btn-sm btn-primary mx-2" v-text="btnText"></button>
     </div>
 </template>
 
