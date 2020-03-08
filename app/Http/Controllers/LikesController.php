@@ -18,4 +18,13 @@ class LikesController extends Controller
     {
         return auth()->user()->likes()->toggle($post);
     }
+
+    public function liked()
+    {
+        $posts = auth()->user()->likes;
+        
+        return view('posts/liked', [
+            'posts' => $posts,
+        ]);
+    }
 }

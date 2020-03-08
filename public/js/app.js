@@ -49701,7 +49701,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("button", {
-      staticClass: "btn btn-sm btn-primary m-3",
+      staticClass: "btn btn-sm btn-primary mx-2",
       domProps: { textContent: _vm._s(_vm.btnText) },
       on: { click: _vm.likePost }
     })

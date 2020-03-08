@@ -40,3 +40,5 @@ Route::delete('/comment/{comment}', 'CommentsController@destroy')->name('destroy
 
 // Likes
 Route::post('/like/{post}', 'LikesController@store');
+Route::get('/liked', 'LikesController@liked')->name('likedPosts');
+
