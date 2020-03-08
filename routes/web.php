@@ -38,3 +38,5 @@ Route::post('/comment', 'CommentsController@store')->name('addComment');
 // delete comment
 Route::delete('/comment/{comment}', 'CommentsController@destroy')->name('destroyComment');
 
+// Likes
+Route::post('/like/{post}', 'LikesController@store');

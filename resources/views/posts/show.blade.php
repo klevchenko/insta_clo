@@ -9,6 +9,10 @@
                 <div class="col-12 col-lg-7 mb-3 mb-lg-4">
                     <img src="/storage/{{$post->image}}" class="w-100" />
 
+                    {{$like}}
+
+                    <like-button post-id="{{$post->id}}" like="{{$like}}"></like-button>
+
                     <form method="POST" action="/p/{{$post->id}}">
                         {{ csrf_field() }}
                         {{ method_field('DELETE') }}
