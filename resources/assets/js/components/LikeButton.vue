@@ -1,6 +1,9 @@
 <template>
     <div>
-         <button @click="likePost" class="btn btn-sm btn-primary mx-2" v-text="btnText"></button>
+         <button 
+            @click="likePost" 
+            v-bind:class="[status ? 'fa-heart' : 'fa-heart-o', def_classes]"
+            ></button>
     </div>
 </template>
 
@@ -16,6 +19,7 @@
         data: function(){
             return{
                 status: this.like,
+                def_classes : 'text-danger fa d-inline border-0 bg-transparent fs-2em',
             }
         },
 
@@ -28,13 +32,5 @@
                 });
            }
         },
-
-        computed: {
-
-           btnText(){
-                return (this.status) ? 'Unlike' : 'Like';
-           }
-
-        }
     }
 </script>

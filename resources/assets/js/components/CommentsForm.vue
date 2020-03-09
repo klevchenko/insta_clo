@@ -16,12 +16,10 @@
                 <a v-bind:href="'/profile/'+ comment.user.id"><strong>{{ comment.user.username }}: </strong></a>
                 {{ comment.text }}
 
-                <button
-                        class="badge badge-pill badge-danger d-inline border-0"
-                        v-on:click="destroyComment(comment.id)"
-                        v-if="user_id == comment.user.id">
-                    del
-                </button>
+                <button 
+                    v-on:click="destroyComment(comment.id)"
+                    v-if="user_id == comment.user.id"
+                    class="text-danger fa fa-times-circle d-inline border-0 bg-transparent"></button>
 
                 <hr>
 

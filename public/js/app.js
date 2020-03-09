@@ -49343,8 +49343,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 
@@ -49448,19 +49446,15 @@ var render = function() {
                         "\n\n            "
                     ),
                     _vm.user_id == comment.user.id
-                      ? _c(
-                          "button",
-                          {
-                            staticClass:
-                              "badge badge-pill badge-danger d-inline border-0",
-                            on: {
-                              click: function($event) {
-                                return _vm.destroyComment(comment.id)
-                              }
+                      ? _c("button", {
+                          staticClass:
+                            "text-danger fa fa-times-circle d-inline border-0 bg-transparent",
+                          on: {
+                            click: function($event) {
+                              return _vm.destroyComment(comment.id)
                             }
-                          },
-                          [_vm._v("\n                del\n            ")]
-                        )
+                          }
+                        })
                       : _vm._e(),
                     _vm._v(" "),
                     _c("hr")
@@ -49589,6 +49583,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 
@@ -49601,7 +49598,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     data: function data() {
         return {
-            status: this.like
+            status: this.like,
+            def_classes: 'text-danger fa d-inline border-0 bg-transparent fs-2em'
         };
     },
 
@@ -49612,12 +49610,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             axios.post('/like/' + this.postId).then(function (resp) {
                 _this.status = !_this.status;
             });
-        }
-    },
-
-    computed: {
-        btnText: function btnText() {
-            return this.status ? 'Unlike' : 'Like';
         }
     }
 });
@@ -49632,8 +49624,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("button", {
-      staticClass: "btn btn-sm btn-primary mx-2",
-      domProps: { textContent: _vm._s(_vm.btnText) },
+      class: [_vm.status ? "fa-heart" : "fa-heart-o", _vm.def_classes],
       on: { click: _vm.likePost }
     })
   ])

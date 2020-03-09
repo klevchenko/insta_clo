@@ -16,47 +16,52 @@
 <body>
     <div id="app">
 
-        <nav class="navbar navbar-expand-lg navbar-light bg-light mb-5">
+        <nav class="navbar navbar-light bg-light mb-5">
             <div class="container">
-                
-                <a class="navbar-brand" href="{{ url('/') }}">{{ config('app.name', 'Laravel') }}</a>
+                <div class="row w-100">
+                    <div class="col-12 col-md-4 d-flex align-content-center justify-content-center justify-content-md-start">
+                        <a class="navbar-brand" href="{{ url('/') }}">
+                            {{ config('app.name', 'Laravel') }}
+                        </a>
+                    </div>
+                    <div class="col-12 col-md-8">
+                    
+                        <ul class="d-flex navbar-nav flex-row align-content-center justify-content-center justify-content-md-end">
+                            <li class="nav-item nav-link mx-1" ><a href="{{ route('allUsers') }}">
+                                <i class="fa fa-users" aria-hidden="true"></i>
+                            </a></li>
+                            
+                            <li class="nav-item nav-link mx-1" ><a href="{{ route('likedPosts') }}">
+                                <i class="fa fa-heart text-danger" aria-hidden="true"></i>
+                            </a></li>
 
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                    <div class="navbar-nav">
+                            <!-- Authentication Links -->
+                            @guest
+                                <li class="nav-item nav-link mx-1" ><a href="{{ route('login') }}">Login</a></li>
+                                <li class="nav-item nav-link mx-1" ><a href="{{ route('register') }}">Register</a></li>
+                            @else
+                                <li class="nav-item nav-link mx-1" >
+                                    <a href="/profile/{{Auth::user()->id}}">
+                                        {{ Auth::user()->username }}
+                                    </a>
+                                </li>
 
-                        <li class="nav-item nav-link" ><a href="{{ route('allUsers') }}">All users</a></li>
-                        <li class="nav-item nav-link" ><a href="{{ route('likedPosts') }}">Liked posts</a></li>
+                                <li class="nav-item nav-link mx-1" >
+                                    <a href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
+                                        document.getElementById('logout-form').submit();">
+                                        <i class="fa fa-sign-out" aria-hidden="true"></i>
+                                    </a>
 
-                        <!-- Authentication Links -->
-                        @guest
-                            <li class="nav-item nav-link" ><a href="{{ route('login') }}">Login</a></li>
-                            <li class="nav-item nav-link" ><a href="{{ route('register') }}">Register</a></li>
-                        @else
-                            <li class="nav-item nav-link" >
-                                <a href="/profile/{{Auth::user()->id}}">
-                                    {{ Auth::user()->username }}
-                                </a>
-                            </li>
-
-                            <li class="nav-item nav-link" >
-                                <a href="{{ route('logout') }}"
-                                   onclick="event.preventDefault();
-                                    document.getElementById('logout-form').submit();">
-                                    Logout
-                                </a>
-
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                    {{ csrf_field() }}
-                                </form>
-                            </li>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        {{ csrf_field() }}
+                                    </form>
+                                </li>
                             @endguest
 
+                        </ul>
                     </div>
                 </div>
-
             </div>
         </nav>
 
