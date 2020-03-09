@@ -25,7 +25,6 @@ Route::patch('/profile/{user}', 'ProfilesController@update')->name('profile.upda
 
 Route::post('/follow/{user}', 'FollowsController@store');
 
-Route::get('/', 'PostsController@index');
 Route::get('/users', 'ProfilesController@showall')->name('allUsers');
 
 // get all post comments
@@ -42,3 +41,6 @@ Route::delete('/comment/{comment}', 'CommentsController@destroy')->name('destroy
 Route::post('/like/{post}', 'LikesController@store');
 Route::get('/liked', 'LikesController@liked')->name('likedPosts');
 
+
+// Home page
+Route::get('/', 'PostsController@index');
