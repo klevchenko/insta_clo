@@ -28,6 +28,7 @@
                     <div class="navbar-nav">
 
                         <li class="nav-item nav-link" ><a href="{{ route('allUsers') }}">All users</a></li>
+                        <li class="nav-item nav-link" ><a href="{{ route('likedPosts') }}">Liked posts</a></li>
 
                         <!-- Authentication Links -->
                         @guest

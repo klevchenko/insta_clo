@@ -51,10 +51,13 @@ class PostsController extends Controller
     public function show(\App\Post $post)
     {
         $follows = auth()->user() ? auth()->user()->following->contains($post->user->id) : false;
+        $like    = auth()->user() ? auth()->user()->likes->contains($post->id) : false;
 
         return view('posts/show', [
             'post' => $post,
             'follows' => $follows,
+            'like' => $like,
+
         ]);
     }
 
