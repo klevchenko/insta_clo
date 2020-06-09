@@ -80,14 +80,16 @@ class ProfilesController extends Controller
         $img_path = '';
 
         if(request('image')){
-            $img_path = request('image')->store('profile', 'public');
+            $img_path = time().'.'.request()->image->getClientOriginalExtension();
+            request()->image->move(public_path('images'), $img_path);
+
         }
 
         auth()->user()->profile->update(array_merge(
             $data,
             ['image' => $img_path]
         ));
-        
+
         return redirect("/profile/{$user->id}");
     }
 

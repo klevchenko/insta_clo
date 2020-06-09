@@ -7,7 +7,7 @@
 
             <div class="row">
                 <div class="col-12 col-lg-7 mb-3 mb-lg-4">
-                    <img src="/storage/{{$post->image}}" class="w-100" />
+                    <img src="/images/{{$post->image}}" class="w-100" />
 
                     <div class="d-flex my-3">
                         <like-button post-id="{{$post->id}}" like="{{$like}}"></like-button>

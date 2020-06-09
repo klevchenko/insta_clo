@@ -38,7 +38,8 @@ class PostsController extends Controller
             'caption' => 'required',
         ]);
 
-        $img_path = request('image')->store('uploads', 'public');
+        $img_path = time().'.'.request()->image->getClientOriginalExtension();
+        request()->image->move(public_path('images'), $img_path);
         
         auth()->user()->posts()->create([
             'image' => $img_path,

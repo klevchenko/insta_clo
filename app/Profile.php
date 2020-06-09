@@ -10,7 +10,7 @@ class Profile extends Model
 
     public function profileImage()
     {
-        return $this->image ? '/storage/'.$this->image : 'https://via.placeholder.com/150';
+        return $this->image ? '/images/'.$this->image : 'https://via.placeholder.com/150';
     }
 
     public function is_my_profile()
