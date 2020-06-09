@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Cache;
 
 use Illuminate\Support\Facades\Gate;
 use App\Providers;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class ProfilesController extends Controller
 {
@@ -79,10 +80,14 @@ class ProfilesController extends Controller
 
         $img_path = '';
 
-        if(request('image')){
-            $img_path = time().'.'.request()->image->getClientOriginalExtension();
-            request()->image->move(public_path('images'), $img_path);
+        if(request('image')) {
 
+            $image       = request()->file('image');
+            $img_path    = $image->getClientOriginalName();
+
+            $image_resize = Image::make($image->getRealPath());
+            $image_resize->resize(300, 300);
+            $image_resize->save(public_path('images/' .$img_path));
         }
 
         auth()->user()->profile->update(array_merge(
